@@ -34,22 +34,22 @@ public class LoginPage extends Application {
   @Override
   public void start(Stage stage) {
 
-	  
-	/* Making the BlueBackGroundRectangle */
-	Rectangle rect1 = new Rectangle(mainRectWidth, mainRectHeight);
-	
-	rect1.setFill(Color.web("#DEE7EC",1));
-	rect1.setArcHeight(40.0);
-	rect1.setArcWidth(40.0);
+      
+    /* Making the BlueBackGroundRectangle */
+    Rectangle rect1 = new Rectangle(mainRectWidth, mainRectHeight);
+    
+    rect1.setFill(Color.web("#DEE7EC",1));
+    rect1.setArcHeight(40.0);
+    rect1.setArcWidth(40.0);
 
-	 /* Welcome Label */
+     /* Welcome Label */
     Text welcomeText = new Text("Welcome");
     Font fontKarlaBold = Font.loadFont(LoginPage.class.getResource("/application/resources/Karla-Bold.ttf").toExternalForm(), 60);
     welcomeText.setFont(fontKarlaBold);
     
     StackPane loginInputBoxPane = new StackPane();
     
-	/* Making the OffWhite Rectangle */
+    /* Making the OffWhite Rectangle */
     Rectangle rect2 = new Rectangle(350, 350);
     rect2.setArcHeight(40.0);
     rect2.setArcWidth(40.0);
@@ -84,7 +84,7 @@ public class LoginPage extends Application {
     
     VBox loginVBox = new VBox();
     loginVBox.getChildren().addAll(loginText, userNameField, 
-    								passwordField, registerBoxPane);
+                                    passwordField, registerBoxPane);
     loginVBox.setAlignment(Pos.CENTER);
     loginVBox.setSpacing(10d);
     
@@ -93,27 +93,27 @@ public class LoginPage extends Application {
     
     /* Making the Logo */
     Image img = new Image(getClass().getResourceAsStream("/application/resources/logoTransparentSmall.png"));
-	ImageView imgView = new ImageView(img);
+    ImageView imgView = new ImageView(img);
 
-	/* Make logo and Off white box horizontal to each other */
-	HBox hbox = new HBox();
-	hbox.getChildren().addAll(imgView, loginInputBoxPane);
-	hbox.setAlignment(Pos.CENTER);
-	
-	
-	/* Make Welcome vertical to the horizontal logo and OffWhite box */
-	VBox vbox1 = new VBox();
-	vbox1.getChildren().addAll(welcomeText, hbox);
-	vbox1.setPadding(new Insets(90, 0, 0, 0));
-	vbox1.setSpacing(100);
-	vbox1.setAlignment(Pos.TOP_CENTER);
-	
-	/* Put Vertical Box in the Stack Pane*/
+    /* Make logo and Off white box horizontal to each other */
+    HBox hbox = new HBox();
+    hbox.getChildren().addAll(imgView, loginInputBoxPane);
+    hbox.setAlignment(Pos.CENTER);
+    
+    
+    /* Make Welcome vertical to the horizontal logo and OffWhite box */
+    VBox vbox1 = new VBox();
+    vbox1.getChildren().addAll(welcomeText, hbox);
+    vbox1.setPadding(new Insets(90, 0, 0, 0));
+    vbox1.setSpacing(100);
+    vbox1.setAlignment(Pos.TOP_CENTER);
+    
+    /* Put Vertical Box in the Stack Pane*/
     StackPane root = new StackPane();
     root.getChildren().addAll(rect1, vbox1, hbox);
 
     Scene scene = new Scene(root, 1280, 720);
-    stage.setTitle("Label Sample");
+    stage.setTitle("Login Page");
     scene.setFill(Color.TRANSPARENT);
     stage.setWidth(1280);
     stage.setHeight(720);
@@ -121,5 +121,3 @@ public class LoginPage extends Application {
     stage.show();
   }
 }
-
-   
