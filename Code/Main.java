@@ -1,14 +1,21 @@
 package application;
 	
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javafx.application.Application;
+import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -26,16 +33,20 @@ public class Main extends Application {
     private Stage secondStage = null;     
     private Scene thirdScene = null;
     private Stage thirdStage = null;
-    private Text loginText = null;
+ //   private Text loginText = null;
     private Button cancel = null;
     private Button register = null;
+    private TextField userNameField = null;
+    private TextField passwordField = null;
+    String file = "Accounts.txt"; // I added this file to my project,
+                                  //couldn't use paths as it kept giving me errors but we should eventually change it to a path
      
 	@Override
-	public void start(Stage stage) {
-		
+	public void start(Stage stage) throws IOException {
+		//File file = new File("Accounts.txt");
+
 		/* Making the BlueBackGroundRectangle */
 	    Rectangle rect1 = new Rectangle(mainRectWidth, mainRectHeight);
-	    
 	    rect1.setFill(Color.web("#DEE7EC",1));
 	    rect1.setArcHeight(40.0);
 	    rect1.setArcWidth(40.0);
@@ -54,54 +65,69 @@ public class Main extends Application {
 	    rect2.setFill(Color.web("#EFEAE4",1));
 	    
 	    /* Sign up Text*/
-	    loginText = new Text("Login");
+	    Text loginText = new Text("Login");
 	    Font fontFredoka = Font.loadFont(Main.class.getResource("/application/resources/FredokaOne-Regular.ttf").toExternalForm(), 30);
-	    loginText.setFont(fontFredoka);
+	    //my code didnt show font properly so I tried this, didn't work but I think its because my paths are messed up
+	    loginText.setFont(Font.font("/application/resources/FredokaOne-Regular.tff",30)/*fontFredoka*/);
 	    
-	    TextField userNameField = new TextField("Enter User Name");
+	    userNameField = new TextField("Enter User Name");
 	    userNameField.setPrefWidth(200);
 	    userNameField.setMaxWidth(200);
 
-	    TextField passwordField = new TextField("Enter Password");
+	    passwordField = new TextField("Enter Password");
 	    passwordField.setPrefWidth(200);
 	    passwordField.setMaxWidth(200);
 	    
 	    /*create the buttons for sing up page*/
-	    Button btn = new Button("Sign Up");
-	    Button btn2 = new Button("Login  ");
+	    Button signUp = new Button("Sign Up");
+	    Button Login = new Button("Login  ");
 	    
-	    btn.setStyle("-fx-background-color: #AB81CD; -fx-background-radius: 15px; -fx-text-fill: #ffffff");
-	    btn.setCursor(Cursor.HAND);
+	    signUp.setStyle("-fx-background-color: #AB81CD; -fx-background-radius: 15px; -fx-text-fill: #ffffff");
+	    signUp.setCursor(Cursor.HAND);
 
-	    btn2.setStyle("-fx-background-color: #AB81CD; -fx-background-radius: 15px; -fx-text-fill: #ffffff");
-	    btn2.setCursor(Cursor.HAND);
+	    Login.setStyle("-fx-background-color: #AB81CD; -fx-background-radius: 15px; -fx-text-fill: #ffffff");
+	    Login.setCursor(Cursor.HAND);
+	    
+	    cancel = new Button("Cancel");
+	    register = new Button("Register");
 	    
 	    /* Stack the OffWhite background with the labels and text field */
 	   
 	    StackPane registerBoxPane = new StackPane();
-	    registerBoxPane.getChildren().addAll(btn2);
+	    registerBoxPane.getChildren().addAll(Login);
 	    
 	    StackPane registerBoxPane2 = new StackPane();
-	    registerBoxPane2.getChildren().addAll(btn);
+	    registerBoxPane2.getChildren().addAll(signUp);
 	    
 	    
 	    /* set register and cancel button next to each other and placed at bottom of gray square*/
 	    HBox signupBox = new HBox();
 	    signupBox.getChildren().addAll(registerBoxPane2,registerBoxPane);
-	    HBox.setMargin(signupBox, new Insets(230,20,0,0));
+	    HBox.setMargin(signupBox, new Insets(30,20,0,0));
 	    signupBox.setSpacing(10d);
 	    
 	    HBox Move = new HBox(signupBox);
-	    Move.setAlignment(Pos.BOTTOM_CENTER);
+	    Move.setAlignment(Pos.CENTER);
 	    
 	    /* add all other members vertically*/
 	    VBox loginVBox = new VBox();
-	    loginVBox.getChildren().addAll(loginText, userNameField,passwordField);
+	    loginVBox.getChildren().addAll(loginText,userNameField,passwordField);
 	    loginVBox.setAlignment(Pos.CENTER);
 	    loginVBox.setSpacing(10d);
 	    
-	    /* put everything together*/
-	    loginInputBoxPane.getChildren().addAll(rect2,loginVBox,Move);
+	  
+	      //Creating a Grid Pane 
+	      GridPane gridPane = new GridPane();    
+	
+	      //Setting the Grid alignment 
+	      gridPane.setAlignment(Pos.CENTER); 
+	       
+	      //Arranging all the nodes in the grid 
+	      gridPane.add(loginVBox,0,0); 
+	      gridPane.add(Move,0,1); 
+
+	    /*put everything together*/
+	    loginInputBoxPane.getChildren().addAll(rect2,gridPane);
 	    
 	    /* Making the Logo */
 	    Image img = new Image(getClass().getResourceAsStream("/application/resources/logoTransparentSmall.png"));
@@ -135,7 +161,23 @@ public class Main extends Application {
 	    stage.setScene(scene);
 	    stage.show();
 	    
-	    btn.setOnAction(e->{
+	    
+	    
+	    Login.setOnAction(e->{
+
+            StackPane root2 = new StackPane();
+            Label label = new Label("Your are now signed in");
+            root2.getChildren().add(label);
+            Scene secondScene = new Scene(root2, 500,500);
+            Stage secondStage = new Stage();
+            secondStage.setScene(secondScene); // set the scene
+            secondStage.setTitle("Second Form");
+            secondStage.show();
+            stage.close(); // close the first stage (Window)
+        });
+	    
+	    	    
+	    signUp.setOnAction(e->{
             
 	    	/* close previous pages*/
 	    	stage.close();
@@ -144,18 +186,18 @@ public class Main extends Application {
 	    	}	    
 	    	
 	    	/* set up the new text */
-	    	loginText = new Text("Sign Up");
-		    loginText.setFont(fontFredoka);
+	    	Text loginText2 = new Text("Sign Up");
+		    loginText2.setFont(fontFredoka);
 	    	
     	    /* Sign up Text for password*/
     	    TextField passwordField2 = new TextField("Re-Enter Password");
     	    passwordField2.setPrefWidth(200);
     	    passwordField2.setMaxWidth(200);
     	    
-    	    /*create the buttons for sing up page*/
+    	    /*create the buttons for sing up page
     	    cancel = new Button("Cancel");
     	    register = new Button("Register");
-    	    
+    	    */
     	    cancel.setStyle("-fx-background-color: #AB81CD; -fx-background-radius: 15px; -fx-text-fill: #ffffff");
     	    cancel.setCursor(Cursor.HAND);
     	    
@@ -169,7 +211,7 @@ public class Main extends Application {
     	    
     	    /* add all other members vertically*/
     	    loginVBox.getChildren().clear();
-    	    loginVBox.getChildren().addAll(loginText, userNameField,passwordField,passwordField2);
+    	    loginVBox.getChildren().addAll(loginText2, userNameField,passwordField,passwordField2);
     	    
     	    /* Put Vertical Box in the Stack Pane*/
     	    StackPane root21 = new StackPane();
@@ -181,6 +223,30 @@ public class Main extends Application {
             secondStage.setScene(secondScene); 
             secondStage.setTitle("Sign Up page");
             secondStage.show();
+            
+            register.setOnAction(e2->{
+            boolean succesfull=false;
+            	             
+           try {
+			StoreAccountInfo(MouseEvent.MOUSE_CLICKED,file);
+			succesfull = true;
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+           
+           if (succesfull = true) {
+        	   StackPane root2 = new StackPane();
+               Label label = new Label("Your are now signed in");
+               root2.getChildren().add(label);
+               Scene secondScene = new Scene(root2, 500,500);
+               Stage secondStage4 = new Stage();
+               secondStage4.setScene(secondScene); // set the scene
+               secondStage4.setTitle("Second Form");
+               secondStage4.show();
+               secondStage.close(); // close the first stage (Window)   	   
+           }
+            
+            });
         
         });    
 	    
@@ -195,9 +261,9 @@ public class Main extends Application {
      	  
    	        /*add all other members vertically and also create the Login text again*/
    	        loginVBox.getChildren().clear();
-   	        loginText = new Text("Login");
-   	        loginText.setFont(fontFredoka);
- 	        loginVBox.getChildren().addAll(loginText, userNameField,passwordField);
+   	        Text loginText3 = new Text("Login");
+   	        loginText3.setFont(fontFredoka);
+ 	        loginVBox.getChildren().addAll(loginText3, userNameField,passwordField);
  
  	        /*Put Vertical Box in the Stack Pane*/
      	    StackPane root3 = new StackPane();
@@ -209,10 +275,27 @@ public class Main extends Application {
             thirdStage.setScene(thirdScene); 
             thirdStage.setTitle("Welcome Page");
             thirdStage.show();
+            
         });    
+	}
+
+	
+	public void StoreAccountInfo(EventType<MouseEvent> mouseClicked, String file) throws IOException {
+		StringBuilder username = new StringBuilder();
+		StringBuilder password = new StringBuilder();
+		username.append(userNameField.getText().toString());
+		password.append(passwordField.getText().toString());
+		
+		FileWriter write = new FileWriter(file,true);
+		write.write(username.toString());
+		write.write(" ");
+		write.write(password.toString());
+		write.write("\n");
+		write.close();
 	}
 	
 	public static void main(String[] args) {
 		launch(args);
 	}
 }
+
