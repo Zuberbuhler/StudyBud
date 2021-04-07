@@ -25,7 +25,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-
+//MOMO's code:
 
 public class Main extends Application {
 	private double mainRectWidth = 1100, mainRectHeight = 650;
