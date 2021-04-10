@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -28,13 +29,14 @@ public class HomePage extends Application {
   }
   
   double mainRectWidth = 1100, mainRectHeight = 650;
+  Timer timer = new Timer();
 
   @Override
   public void start(Stage stage) {
     
 /* Tool Bar */  
-	// tool bar: message 
-	Text toolBarMessage = new Text("Welcome!");
+    // tool bar: message 
+    Text toolBarMessage = new Text("Welcome!");
     Font fontKarlaBold = Font.loadFont(HomePage.class.getResource("/application/resources/Karla-Bold.ttf").toExternalForm(), 20);
     toolBarMessage.setFont(fontKarlaBold);
     
@@ -44,17 +46,19 @@ public class HomePage extends Application {
     imgView.setFitWidth(100);
     imgView.setFitHeight(100);
     
-	// tool bar: logout button
+    // tool bar: logout button
     Button logoutBtn = new Button("Logout");
     logoutBtn.setFont(fontKarlaBold);
     logoutBtn.setStyle("-fx-background-color: thistle;");
+    //logoutBtn.setPrefSize(, 10);
 
     // horizontal layout for tool bar 
     HBox toolBarContent = new HBox();
     toolBarContent.getChildren().addAll(imgView, toolBarMessage, logoutBtn);
     toolBarContent.setAlignment(Pos.CENTER);
-    toolBarContent.setSpacing(500);
+    toolBarContent.setSpacing(100);
     toolBarContent.setStyle("-fx-background-color: lightblue;"); // change to og color !!
+    toolBarContent.setPadding(new Insets(20,20,20,20));
    
 /* Timer */
     // timer: blue background
@@ -75,13 +79,20 @@ public class HomePage extends Application {
     startBtn.setFont(fontKarlaBold);
     startBtn.setStyle("-fx-background-color: thistle;");
     
+    
     Button stopBtn = new Button("Stop Timer");
     stopBtn.setFont(fontKarlaBold);
     stopBtn.setStyle("-fx-background-color: thistle;");
     
+    
+    Button resetBtn = new Button("Reset Timer");
+    resetBtn.setFont(fontKarlaBold);
+    resetBtn.setStyle("-fx-background-color: thistle;");
+    
+    
     // vertical layout for buttons 
     VBox timerButtons = new VBox();
-    timerButtons.getChildren().addAll(startBtn, stopBtn);
+    timerButtons.getChildren().addAll(startBtn, stopBtn, resetBtn);
     timerButtons.setSpacing(20);
     timerButtons.setPadding(new Insets(20,20,20,20));
     
@@ -92,30 +103,49 @@ public class HomePage extends Application {
     
     Label stopWatchTime = new Label("00:00");
     stopWatchTime.setFont(fontKarlaBold);
+   
+    
+    
     
     StackPane stopWatchLayout = new StackPane();
     stopWatchLayout.setAlignment(Pos.CENTER);
     stopWatchLayout.getChildren().addAll(stopWatchCircle, stopWatchTime);
     
-    // Adding Button Actions   
-    Timer clockTime = new Timer();
-    
-    startBtn.setOnAction(new EventHandler<ActionEvent>(){
-
-		@Override
-		public void handle(ActionEvent event) {
-			//stopWatchTime.setText(time);
-		}
-    	
+    // Adding Button Actions  
+    startBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> 
+    {
+        if(timer.isRunning() == false)
+        {
+            timer.start();
+            stopWatchTime.setText("Started Time");
+        } 
+        else 
+        {
+            stopWatchTime.setText("Timer is running!");
+        }
+     });
+        
+    resetBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, e ->
+    {
+        if(timer.isRunning() == true)
+        {
+            timer.stop();
+            stopWatchTime.setText("Reset time");
+        }
+        stopWatchTime.setText("Timer is already reset");
     });
-    
-   stopBtn.setOnAction(new EventHandler<ActionEvent>() {
-
-	   @Override
-	   public void handle(ActionEvent event) {
-		  // clockTime.stopTime();
-	}
-   });
+    stopBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, e ->
+    {
+        if(timer.isRunning() == true)
+        {
+            timer.pause();
+            stopWatchTime.setText("Paused Time!");
+        }
+        else
+        {
+            stopWatchTime.setText("Time is already Paused");
+        }
+    });
     
     // Timer Layout 
     BorderPane timerLayout = new BorderPane();
@@ -173,7 +203,7 @@ public class HomePage extends Application {
     stage.setTitle("Login Page");
     scene.setFill(Color.TRANSPARENT);
     stage.setWidth(1280);
-    stage.setHeight(720);
+    stage.setHeight(850);
     stage.setScene(scene);
     stage.show();
   }
