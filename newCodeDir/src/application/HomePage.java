@@ -104,8 +104,7 @@ public class HomePage extends Application {
 
 		@Override
 		public void handle(ActionEvent event) {
-			String time = clockTime.getMinutes() + ":" + clockTime.getSeconds();
-			stopWatchTime.setText(time);
+			//stopWatchTime.setText(time);
 		}
     	
     });
@@ -114,7 +113,7 @@ public class HomePage extends Application {
 
 	   @Override
 	   public void handle(ActionEvent event) {
-		   clockTime.stopTime();
+		  // clockTime.stopTime();
 	}
    });
     
@@ -146,12 +145,23 @@ public class HomePage extends Application {
     // data: layout
     StackPane data = new StackPane();
     data.getChildren().addAll(dataBackground, dataChartImage);
-    
- /* Vertical layout pane for timer and data */
+
+    /* Vertical layout pane for timer and data */
     VBox leftWidgets = new VBox();
     leftWidgets.getChildren().addAll(timer, data);    
     leftWidgets.setSpacing(20);
     leftWidgets.setPadding(new Insets(20,20,20,20));
+    
+ /*Highlights */
+    
+ /*Tasks */
+    // Task: buttons
+    Button addTaskBtn = new Button("Add Task");
+    addTaskBtn.setFont(fontKarlaBold);
+    addTaskBtn.setStyle("-fx-background-color: thistle;");  
+    
+    Button modifyTaskBtn = new Button("Modify Task");
+    
     
  /* Set up Page Layout */
     BorderPane root = new BorderPane();
