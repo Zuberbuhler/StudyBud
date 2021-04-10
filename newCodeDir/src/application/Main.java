@@ -316,7 +316,7 @@ public class Main extends Application {
 		}
 		
 		/*checks if username already exist*/
-		if(checkIfUsernameDup(file,username)) {
+		if(checkIfUsernameDup(file,username) && create == true) {
 			flag=2;
 			return false;
 		}
