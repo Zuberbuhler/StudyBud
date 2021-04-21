@@ -201,101 +201,7 @@ public class HomePage extends Application {
  /*Tasks */
    
     // ---------------------TABLE----------------------------------------
-    TableView tableView = new TableView();
-    tableView.setEditable(true);
-    // Sets up table to be selectable
-    TableViewSelectionModel<Task> selectionModel = tableView.getSelectionModel();
-    selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
-    tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY); // Removes extra column
-    
-    
-    
-    
-    // COlUMNS
-    TableColumn<Task, String> column1 = new TableColumn<>("Task Name");
-    column1.setCellValueFactory(new PropertyValueFactory("taskName"));
-    column1.setCellFactory(TextFieldTableCell.<Task>forTableColumn());
-    column1.setMinWidth(175);
-    
-    TableColumn<Task, String> column2 = new TableColumn<>("Due Date");
-    column2.setCellValueFactory(new PropertyValueFactory("dueDate"));
-    column2.setCellFactory(TextFieldTableCell.<Task>forTableColumn());
-    column2.setMinWidth(50);
-    
-    TableColumn<Task, String> column3 = new TableColumn<>("Course");
-    column3.setCellValueFactory(new PropertyValueFactory("Course"));
-    column3.setCellFactory(TextFieldTableCell.<Task>forTableColumn());
-    
-    TableColumn<Task, Boolean> column4 = new TableColumn<>("Completed");
-    column4.setCellValueFactory(cellData -> new ReadOnlyBooleanWrapper());
-    column4.setCellFactory(CheckBoxTableCell.<Task>forTableColumn(column4));
-    column4.setMinWidth(50);
-    
-    
-    tableView.getColumns().add(column1);
-    tableView.getColumns().add(column2);
-    tableView.getColumns().add(column3);
-    tableView.getColumns().add(column4);
-    
-    tableView.setItems(tableData);
-    
-    TextField addTaskName = new TextField();
-    addTaskName.setPromptText("Task Name");
-    addTaskName.setMinWidth(200);
-    addTaskName.setFont(Font.font("Arial", FontWeight.BOLD, 13));
-    
-    TextField addDueDate = new TextField();
-    addDueDate.setMaxWidth(column2.getPrefWidth());
-    addDueDate.setPromptText("Due Date");
-    addDueDate.setFont(Font.font("Arial", FontWeight.BOLD, 13));
-    
-    TextField addCourse = new TextField();
-    addCourse.setPromptText("Add Course");
-    addCourse.setMaxWidth(column3.getPrefWidth());
-    addCourse.setFont(Font.font("Arial", FontWeight.BOLD, 13));
-    
-    Button addButton = new Button("Add");
-    addButton.setOnAction(new EventHandler<ActionEvent>() {
-    		@Override
-    		public void handle(ActionEvent e) {
-    			tableData.add(new Task(
-    					addTaskName.getText(),
-    					addDueDate.getText(),
-    					addCourse.getText()));
-    			addTaskName.clear();
-    			addDueDate.clear();
-    			addCourse.clear();
-    		}
-    });
-    addButton.setMinWidth(100);
-    addButton.setMaxHeight(10);
-    addButton.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 14));
-    addButton.setStyle("-fx-background-color: thistle;");
-    
-    Button deleteButton = new Button("Delete");
-    deleteButton.setOnAction(e -> tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItems()));
-    deleteButton.setMinWidth(100);
-    deleteButton.setMaxHeight(10);
-    deleteButton.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 14));
-    deleteButton.setStyle("-fx-background-color: thistle;");
-    
-    //ObservableList<Task> selectedItems = selectionModel.getSelectedItems();
-    //tableView.getItems().removeAll(selectedItems);
-    
-    
-    HBox hb = new HBox();
-    hb.getChildren().addAll(addTaskName, addDueDate, addCourse, addButton, deleteButton);
-    hb.setSpacing(5);
-    
-    VBox vbox = new VBox(tableView, hb);
-    vbox.setSpacing(20);
-    vbox.setPadding(new Insets(20,20,20,20));
-    
-    
-    
-    // ---------------------TABLE----------------------------------------
-    
-    
+    VBox vbox = createTable();
     
  /* Set up Page Layout */
     BorderPane root = new BorderPane();
@@ -314,5 +220,99 @@ public class HomePage extends Application {
     stage.setHeight(850);
     stage.setScene(scene);
     stage.show();
+  }
+  
+  public VBox createTable()
+  {
+	  TableView tableView = new TableView();
+	    tableView.setEditable(true);
+	    // Sets up table to be selectable
+	    TableViewSelectionModel<Task> selectionModel = tableView.getSelectionModel();
+	    selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
+	    tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY); // Removes extra column
+	    
+	    
+	    
+	    
+	    // COlUMNS
+	    TableColumn<Task, String> column1 = new TableColumn<>("Task Name");
+	    column1.setCellValueFactory(new PropertyValueFactory("taskName"));
+	    column1.setCellFactory(TextFieldTableCell.<Task>forTableColumn());
+	    column1.setMinWidth(175);
+	    
+	    TableColumn<Task, String> column2 = new TableColumn<>("Due Date");
+	    column2.setCellValueFactory(new PropertyValueFactory("dueDate"));
+	    column2.setCellFactory(TextFieldTableCell.<Task>forTableColumn());
+	    column2.setMinWidth(50);
+	    
+	    TableColumn<Task, String> column3 = new TableColumn<>("Course");
+	    column3.setCellValueFactory(new PropertyValueFactory("Course"));
+	    column3.setCellFactory(TextFieldTableCell.<Task>forTableColumn());
+	    
+	    TableColumn<Task, Boolean> column4 = new TableColumn<>("Completed");
+	    column4.setCellValueFactory(cellData -> new ReadOnlyBooleanWrapper());
+	    column4.setCellFactory(CheckBoxTableCell.<Task>forTableColumn(column4));
+	    column4.setMinWidth(50);
+	    
+	    
+	    tableView.getColumns().add(column1);
+	    tableView.getColumns().add(column2);
+	    tableView.getColumns().add(column3);
+	    tableView.getColumns().add(column4);
+	    
+	    tableView.setItems(tableData);
+	    
+	    TextField addTaskName = new TextField();
+	    addTaskName.setPromptText("Task Name");
+	    addTaskName.setMinWidth(200);
+	    addTaskName.setFont(Font.font("Arial", FontWeight.BOLD, 13));
+	    
+	    TextField addDueDate = new TextField();
+	    addDueDate.setMaxWidth(column2.getPrefWidth());
+	    addDueDate.setPromptText("Due Date");
+	    addDueDate.setFont(Font.font("Arial", FontWeight.BOLD, 13));
+	    
+	    TextField addCourse = new TextField();
+	    addCourse.setPromptText("Add Course");
+	    addCourse.setMaxWidth(column3.getPrefWidth());
+	    addCourse.setFont(Font.font("Arial", FontWeight.BOLD, 13));
+	    
+	    Button addButton = new Button("Add");
+	    addButton.setOnAction(new EventHandler<ActionEvent>() {
+	    		@Override
+	    		public void handle(ActionEvent e) {
+	    			tableData.add(new Task(
+	    					addTaskName.getText(),
+	    					addDueDate.getText(),
+	    					addCourse.getText()));
+	    			addTaskName.clear();
+	    			addDueDate.clear();
+	    			addCourse.clear();
+	    		}
+	    });
+	    addButton.setMinWidth(100);
+	    addButton.setMaxHeight(10);
+	    addButton.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 14));
+	    addButton.setStyle("-fx-background-color: thistle;");
+	    
+	    Button deleteButton = new Button("Delete");
+	    deleteButton.setOnAction(e -> tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItems()));
+	    deleteButton.setMinWidth(100);
+	    deleteButton.setMaxHeight(10);
+	    deleteButton.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 14));
+	    deleteButton.setStyle("-fx-background-color: thistle;");
+	    
+	    //ObservableList<Task> selectedItems = selectionModel.getSelectedItems();
+	    //tableView.getItems().removeAll(selectedItems);
+	    
+	    
+	    HBox hb = new HBox();
+	    hb.getChildren().addAll(addTaskName, addDueDate, addCourse, addButton, deleteButton);
+	    hb.setSpacing(5);
+	    
+	    VBox vbox = new VBox(tableView, hb);
+	    vbox.setSpacing(20);
+	    vbox.setPadding(new Insets(20,20,20,20));
+	    return vbox;
   }
 }
