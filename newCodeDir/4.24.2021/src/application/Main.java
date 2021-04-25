@@ -36,6 +36,8 @@ public class Main extends Application {
     private Stage secondStage = null;     
     private Scene thirdScene = null;
     private Stage thirdStage = null;
+    
+    Scene scene;
 
     private int flag = 0; // flag used to see what type of error it is. 0 = incorrect username or password 
     					  // 1 =  password entries did not match when creating account 2 = user username already exist 3 = account already exist
@@ -56,7 +58,7 @@ public class Main extends Application {
 		Button signUp = loginGUI.getSignupBtn();
 		
 		   /*create scene and stage*/
-	    Scene scene = new Scene(root, 1280, 720);
+	    scene = new Scene(root, 1280, 720);
 	   
 	    stage.setTitle("Login Page");
 	    scene.setFill(Color.TRANSPARENT);
@@ -78,7 +80,7 @@ public class Main extends Application {
             
             /*if the login credentials match then open main menu*/
             if (succesfull == true) {
-            	Scene sceneHomePage = buildHomePage(stage, scene);
+            	 Scene sceneHomePage = buildHomePage(stage, scene);
         		 
         		 stage.setTitle("Login Page");
         		 sceneHomePage.setFill(Color.TRANSPARENT);
@@ -109,24 +111,24 @@ public class Main extends Application {
 	    signUp.setOnAction(e->{
             
 	    	/* close previous pages*/
-	    	stage.close();
-	    	if(thirdStage != null) {
-	    		thirdStage.close();		
-	    	}	    
+	    	//stage.close();
+//	    	if(thirdStage != null) {
+//	    		thirdStage.close();		
+//	    	}	    
 	    	
 	    	StackPane root21 = loginGUI.signupSetUp();
 	    	
             /* create scene and stage*/
             secondScene = new Scene(root21, 1280, 720);
-            secondStage = new Stage();
-            secondStage.setScene(secondScene); 
-            secondStage.setTitle("Sign Up page");
-            secondStage.show();
+            //secondStage = new Stage();
+            stage.setScene(secondScene); 
+            stage.setTitle("Sign Up Page");
+            //secondStage.setTitle("Sign Up page");
+            //secondStage.show();
             
             Button register = loginGUI.getRegisterBtn();
             register.setOnAction(e2->{
-            boolean succesfull=false;
-            	             
+            boolean succesfull=false;             
            try {
         	   /* calls method that creates accounts while also making sure account is brand new and passwords entry match*/
 			succesfull=StoreAccountInfo(loginGUI, MouseEvent.MOUSE_CLICKED,file,true);
@@ -136,14 +138,28 @@ public class Main extends Application {
            
            /*If account is successfully made then it opens the main menu*/
            if (succesfull == true) {
+        	   
+        	   Scene sceneHomePage = buildHomePage(stage, scene);
+        		 
+     			stage.setTitle("Home Page");
+     			sceneHomePage.setFill(Color.TRANSPARENT);
+     			stage.setWidth(1280);
+     			stage.setHeight(850);
+     		 	stage.setScene(sceneHomePage);
+     		 	
         	   StackPane root2 = new StackPane();
-               Label label = new Label("You are now registered. Please sign in with your information.");
+               Label label = new Label("You are now registered.");
                root2.getChildren().add(label);
                Scene secondScene = new Scene(root2, 500,500);
                Stage secondStage4 = new Stage();
                secondStage4.setScene(secondScene);
                secondStage4.setTitle("Second Form");
                secondStage4.show();
+      		 	
+      		 	
+      		 	
+      		 	//Scene scene = new Scene(root, 1280, 720);
+               
                //secondStage.close(); // close the first stage (Window)   	   
            }else {
         	   
@@ -174,7 +190,8 @@ public class Main extends Application {
 		
 		logoutBtn.addEventFilter(MouseEvent.MOUSE_CLICKED, eH -> 
         {
-        	stage.setScene(scene);
+        	stage.close();
+        	//stage.setScene(scene);
          });
 		
 		/* Timer */
