@@ -1,0 +1,10 @@
+Tasks | 4 |
+testName1 | 01-01 | CS151 | False |
+testName2 | 02-02 | CS151 | False |
+testName3 | 02-03 | CS152 | False |
+testName4 | 02-04 | CS153 | True |
+TimeLogs | 4 |
+2021-05-08 | Saturday | 2.5 |
+2021-05-09 | Sunday | 2.0 |
+2021-05-09 | Thursday | 2.1 |
+2021-05-09 | Tuesday | 2.2 |
