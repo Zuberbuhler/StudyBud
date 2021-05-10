@@ -1,0 +1,12 @@
+Tasks | 3 |
+Test1 | 05-09 | CS151 | False |
+Test2 | 05-10 | CS152 | False |
+Test3 | 05-11 | CS153 | False |
+TimeLogs | 7 |
+2021-05-08 | Monday | 1.0 |
+2021-05-08 | Tuesday | 5.0 |
+2021-05-08 | Wednesday | 4.0 |
+2021-05-08 | Thursday | 3.0 |
+2021-05-08 | Friday | 5.0 |
+2021-05-08 | Saturday | 6.0 |
+2021-05-08 | Sunday | 3.0 |
