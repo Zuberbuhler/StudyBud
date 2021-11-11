@@ -23,7 +23,7 @@
 
 <p align="center">
   <a href="https://github.com/Zuberbuhler/CS151_Team2_TermProject">
-    <img src="Resources/signin.png" alt="sign in" width="80" height="80">
+    <img src="Resources/logoTransparentSmall.png" alt="sign in" width="80" height="80">
   </a>
 
   <h3 align="center">Study Bud</h3>
