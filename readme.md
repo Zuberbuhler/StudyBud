@@ -23,7 +23,7 @@
 
 <p align="center">
   <a href="https://github.com/Zuberbuhler/CS151_Team2_TermProject">
-    <img src="resources/signin.png" alt="Logo" width="80" height="80">
+    <img src="Resources/signin.png" alt="sign in" width="80" height="80">
   </a>
 
   <h3 align="center">Study Bud</h3>
@@ -35,14 +35,14 @@
     Login Page
    <br />
     <a href="https://github.com/Zuberbuhler/CS151_Team2_TermProject">
-      <img src="resources/registration.png" alt="login page" width="686" height="396">
+      <img src="Resources/registration.png" alt="login page" width="686" height="396">
     </a>
   </p>
   <p align="center">
     Homepage
    <br />
     <a href="https://github.com/Zuberbuhler/CS151_Team2_TermProject">
-      <img src="resources/homepage.png" alt="homepage" width="686" height="396">
+      <img src="Resources/homepage.png" alt="homepage" width="686" height="396">
     </a>
   </p>
 </p>
