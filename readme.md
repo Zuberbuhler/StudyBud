@@ -35,8 +35,11 @@
   </p>
   
   <p align="center">
+  
   Video Walkthrough
+  
   <img src='./studyBud_VideoWalkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+  
   </p>
   
   <p align="center">
