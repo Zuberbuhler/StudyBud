@@ -34,12 +34,12 @@
     This is an stand alone application that helps organize student life.
   </p>
   
-  <p align="center">
-  
+  <h2 align="center">
   Video Walkthrough
+  </h2>
   
+  <p align="center">
   <img src='./studyBud_VideoWalkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-  
   </p>
   
   <p align="center">
