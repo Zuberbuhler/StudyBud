@@ -25,12 +25,18 @@
   <a href="https://github.com/Zuberbuhler/CS151_Team2_TermProject">
     <img src="Resources/logoTransparentSmall.png" alt="sign in" width="80" height="80">
   </a>
+  
+  
 
   <h3 align="center">Study Bud</h3>
 
   <p align="center">
     This is an stand alone application that helps organize student life.
   </p>
+  
+  <img src='./studyBud_VideoWalkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+  
   <p align="center">
     Login Page
    <br />
